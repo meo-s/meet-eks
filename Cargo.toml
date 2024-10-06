@@ -1,0 +1,14 @@
+[workspace]
+resolver            = "2"
+members             = [ "foo-service", "bar-service" ]
+
+[workspace.dependencies]
+anyhow              = { version = "1.0.89" }
+prost               = { version = "0.13.3", features = ["prost-derive"] }
+prost-derive        = { version = "0.13.3" }
+tokio               = { version = "1.40.0", features = ["full"] }
+tonic               = { version = "0.12.3" }
+tonic-reflection    = { version = "0.12.3" }
+
+# build-dependencies
+tonic-build         = { version = "0.12.3" }

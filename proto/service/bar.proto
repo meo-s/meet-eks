@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package service.bar;
+
+import "common.proto";
+
+service BarRpc {
+    rpc Greet(common.GreetRequest) returns (common.GreetResponse) {}
+}

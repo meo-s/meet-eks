@@ -1,0 +1,58 @@
+nameOverride:
+fullnameOverride:
+namespaceOverride:
+
+replicas: 1
+annotations:
+podAnnotations:
+podLabels:
+nodeSelector:
+affinity:
+tolerations:
+
+image:
+  # The Docker registry
+  registry: docker.io
+  # The Docker image repository
+  repository: me0s/bar-service
+  # Override the image tag whose default is the chart appVersion
+  tag: latest
+  pullPolicy: IfNotPresent
+
+  # ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+  pullSecrets: []
+
+rbac:
+  serviceAccount:
+    name:
+    create: true
+    annotations: []
+    labels: []
+    automountServiceAccountToken: true
+
+service:
+  annotations: []
+  labels: []
+  type: ClusterIP
+  port: 80
+  targetPort:
+
+ingress:
+  enabled: true
+  className: alb
+  labels: []
+  # ref: https://kubernetes-sigs.github.io/aws-load-balancer-controller/latest/guide/ingress/annotations
+  annotations:
+    alb.ingress.kubernetes.io/load-balancer-name: lb-foo-bar-service
+    alb.ingress.kubernetes.io/group.name: foo-bar-service
+    alb.ingress.kubernetes.io/certificate-arn:
+    alb.ingress.kubernetes.io/backend-protocol-version: GRPC
+    alb.ingress.kubernetes.io/listen-ports: "[{ \"HTTP\": 80, \"HTTPS\": 443 }]"
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+  hosts:
+  - paths:
+    - path: /service.bar.BarRpc/*
+      pathType: ImplementationSpecific

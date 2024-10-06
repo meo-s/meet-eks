@@ -1,0 +1,17 @@
+[package]
+name                = "foo-service"
+version             = "1.0.0"
+edition             = "2021"
+authors             = [ "meoseong.ki@gmail.com" ]
+repository          = "https://github.com/meo-s/meet-eks"
+
+[dependencies]
+anyhow              = { workspace = true }
+prost               = { workspace = true }
+prost-derive        = { workspace = true }
+tokio               = { workspace = true }
+tonic               = { workspace = true }
+tonic-reflection    = { workspace = true }
+
+[build-dependencies]
+tonic-build         = { workspace = true }
